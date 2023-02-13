@@ -7,6 +7,7 @@ cloudbees-pipeline-policies:
       - entirePipelineTimeoutRule:
           maxTime: 30
 jenkins:
+  authorizationStrategy: "cloudBeesRoleBasedAccessControl"
   globalNodeProperties:
   - envVars:
       env:
@@ -15,7 +16,7 @@ jenkins:
       - key: "GITHUB_APP"
         value: "${GITHUB_APP}"
   quietPeriod: 0
-  systemMessage: 'This instance has been configured using CloudBees CI CasC - v4'
+  systemMessage: 'This instance has been configured using CloudBees CI CasC - v2'
 globalCloudBeesPipelineTemplateCatalog:
   catalogs:
   - branchOrTag: "main"
@@ -61,7 +62,7 @@ unclassified:
         modernSCM:
           scm:
             github:
-              credentialsId: "cbci-workshop-github-app-pem"
+              credentialsId: "cbcci-workshop-github-app-pem"
               repoOwner: "${GITHUB_ORGANIZATION}"
               repository: "pipeline-library"
   headerLabel:
@@ -96,7 +97,7 @@ kube:
       - emptyDirVolume:
           memory: false
           mountPath: "/var/maven/"
-      yamlMergeStrategy: "override"    
+      yamlMergeStrategy: "override"
 credentials:
   system:
     domainCredentials:
@@ -119,4 +120,3 @@ credentials:
           id: api-token
           usernameSecret: false
           username: "${GITHUB_USER}"
-          
