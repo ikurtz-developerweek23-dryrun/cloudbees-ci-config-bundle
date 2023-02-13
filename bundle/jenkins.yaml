@@ -1,4 +1,13 @@
+cloudbees-pipeline-policies:
+  config:
+    policies:
+    - action: "fail"
+      name: "Timeout policy"
+      rules:
+      - entirePipelineTimeoutRule:
+          maxTime: 30
 jenkins:
+  authorizationStrategy: "cloudBeesRoleBasedAccessControl"
   globalNodeProperties:
   - envVars:
       env:
@@ -47,13 +56,13 @@ unclassified:
     durabilityHint: PERFORMANCE_OPTIMIZED
   globallibraries:
     libraries:
-    - defaultVersion: "main"
+    - defaultVersion: "module-2"
       name: "pipeline-library"
       retriever:
         modernSCM:
           scm:
             github:
-              credentialsId: "cbci-workshop-github-app-pem"
+              credentialsId: "cbcci-workshop-github-app-pem"
               repoOwner: "${GITHUB_ORGANIZATION}"
               repository: "pipeline-library"
   headerLabel:
